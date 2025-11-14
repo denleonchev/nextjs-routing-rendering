@@ -1,3 +1,7 @@
+.yearArchiveTitle {
+  margin-bottom: 1em;
+}
+
 .archiveHeader ul {
   display: flex;
   gap: 1rem;
