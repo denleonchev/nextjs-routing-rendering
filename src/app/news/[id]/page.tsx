@@ -1,5 +1,5 @@
-import { DUMMY_NEWS } from "@/dummy-news";
 import styles from "@/app/news/[id]/page.module.css";
+import { DUMMY_NEWS } from "@/dummy-news";
 import { notFound } from "next/navigation";
 
 export default async function NewsDetailPage(props: PageProps<"/news/[id]">) {
