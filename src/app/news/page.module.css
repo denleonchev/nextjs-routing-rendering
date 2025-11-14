@@ -1,3 +1,7 @@
+.newsTitle {
+  margin-bottom: 1em;
+}
+
 .newsList {
   display: grid;
   gap: 1rem;
