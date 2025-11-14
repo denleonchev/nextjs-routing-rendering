@@ -24,7 +24,11 @@ export default async function ArchivePage({
           </ul>
         </nav>
       </header>
-      <NewsList news={filteredNews} />
+      {filteredNews.length ? (
+        <NewsList news={filteredNews} />
+      ) : (
+        <p>There are no news for the selected period</p>
+      )}
     </>
   );
 }
