@@ -1,18 +1,21 @@
 import { getAllNews, getNewsForYear, getNewsForYearAndMonth } from "@/lib/news";
 
-export function getFilteredNews(filter?: (string | undefined)[]) {
-  if (!filter) {
+export function getFilteredNews(year?: number, month?: number) {
+  if (year === undefined) {
     return getAllNews();
   }
 
-  const year = Number(filter[0]);
-  const month = Number(filter[1]);
+  const isMonthInvalid = month !== undefined && isNaN(month);
 
-  if (!isNaN(year) && isNaN(month)) {
+  if (isNaN(year) || isMonthInvalid) {
+    return [];
+  }
+
+  if (year && month === undefined) {
     return getNewsForYear(year);
   }
 
-  if (!isNaN(year) && !isNaN(month)) {
+  if (year && month !== undefined) {
     return getNewsForYearAndMonth(year, month);
   }
 

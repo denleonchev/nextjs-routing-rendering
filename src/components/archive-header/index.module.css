@@ -1,7 +1,3 @@
-.yearArchiveTitle {
-  margin-bottom: 1em;
-}
-
 .archiveHeader ul {
   display: flex;
   gap: 1rem;
@@ -19,4 +15,8 @@
 .archiveHeader ul a:hover,
 .archiveHeader ul a.active {
   color: #e5e5e1;
+}
+
+.archiveHeader > * {
+  margin-bottom: 1em;
 }

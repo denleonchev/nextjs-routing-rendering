@@ -1,34 +1,33 @@
 import NewsList from "@/components/news-list";
-import { getAvailableNewsYears, getNewsForYear } from "@/lib/news";
-import styles from "@/app/archive/@archive/[[...filter]]/page.module.css";
-import Link from "next/link";
+import { getAvailableNewsMonths, getAvailableNewsYears } from "@/lib/news";
 import { getFilteredNews } from "./utils";
+import ArchiveHeader from "@/components/archive-header";
 
 export default async function ArchivePage({
   params,
 }: PageProps<"/archive/[[...filter]]">) {
   const { filter } = await params;
-  const filteredNews = getFilteredNews(filter);
+  const isYearSelected = filter?.[0] !== undefined && filter?.[0] !== "";
+  const isMonthSelected = filter?.[1] !== undefined && filter?.[1] !== "";
+  const selectedYear = isYearSelected ? parseInt(filter?.[0]) : undefined;
+  const selectedMonth = isMonthSelected ? parseInt(filter?.[1]) : undefined;
+  const availableNewsMonths = getAvailableNewsMonths(selectedYear);
   const availableNewsYears = getAvailableNewsYears();
+  const filteredNews = getFilteredNews(selectedYear, selectedMonth);
+
+  if (!filteredNews.length) {
+    throw new Error("Filter is invalid");
+  }
 
   return (
     <>
-      <header className={styles.archiveHeader}>
-        <nav>
-          <ul>
-            {availableNewsYears.map((year) => (
-              <li key={year}>
-                <Link href={`/archive/${year}`}>{year}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
-      {filteredNews.length ? (
-        <NewsList news={filteredNews} />
-      ) : (
-        <p>There are no news for the selected period</p>
-      )}
+      <ArchiveHeader
+        selectedYear={selectedYear}
+        selectedMonth={selectedMonth}
+        years={availableNewsYears}
+        months={availableNewsMonths}
+      />
+      <NewsList news={filteredNews} />
     </>
   );
 }
