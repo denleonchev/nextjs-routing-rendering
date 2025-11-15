@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { DUMMY_NEWS } from "@/dummy-news";
-import styles from "@/app/news/[id]/image/page.module.css";
+import NewsImageModal from "@/components/image-modal";
 
-export default async function NewsImagePage(
+export default async function NewsImgaeInterceptingPage(
   props: PageProps<"/news/[id]/image">,
 ) {
   const { id } = await props.params;
@@ -12,9 +12,5 @@ export default async function NewsImagePage(
     notFound();
   }
 
-  return (
-    <div className={styles.fullscreenImage}>
-      <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} />
-    </div>
-  );
+  return <NewsImageModal image={newsItem.image} title={newsItem.title} />;
 }
