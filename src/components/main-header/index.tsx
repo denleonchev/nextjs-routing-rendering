@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./index.module.css";
+import NavLink from "./nav-link";
 
 export default function MainHeader() {
   return (
@@ -9,10 +10,10 @@ export default function MainHeader() {
       </div>
       <ul>
         <li>
-          <Link href="/">Home</Link>
+          <NavLink href="/news">News</NavLink>
         </li>
         <li>
-          <Link href="/news">News</Link>
+          <NavLink href="/archive">Archive</NavLink>
         </li>
       </ul>
     </header>
