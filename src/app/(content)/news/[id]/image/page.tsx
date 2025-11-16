@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { DUMMY_NEWS } from "@/dummy-news";
-import styles from "@/app/news/[id]/image/page.module.css";
+import styles from "@/app/(content)/news/[id]/image/page.module.css";
 
 export default async function NewsImagePage(
   props: PageProps<"/news/[id]/image">,

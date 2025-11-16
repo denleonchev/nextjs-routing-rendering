@@ -1,4 +1,4 @@
-import styles from "@/app/archive/layout.module.css";
+import styles from "@/app/(content)/archive/layout.module.css";
 
 export default function ArchiveLayout({
   archive,

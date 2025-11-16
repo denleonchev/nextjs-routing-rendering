@@ -1,4 +1,4 @@
-import styles from "@/app/news/[id]/page.module.css";
+import styles from "@/app/(content)/news/[id]/page.module.css";
 import { DUMMY_NEWS } from "@/dummy-news";
 import Link from "next/link";
 import { notFound } from "next/navigation";

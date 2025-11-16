@@ -1,4 +1,4 @@
-import styles from "@/app/news/page.module.css";
+import styles from "@/app/(content)/news/page.module.css";
 import { getAllNews } from "@/lib/news";
 import NewsList from "@/components/news-list";
 

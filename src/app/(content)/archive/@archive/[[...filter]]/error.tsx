@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/app/archive/@archive/[[...filter]]/error.module.css";
+import styles from "@/app/(content)/archive/@archive/[[...filter]]/error.module.css";
 
 export default function ArchiveFilterError() {
   return (

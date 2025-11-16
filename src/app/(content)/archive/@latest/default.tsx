@@ -1,6 +1,6 @@
 import NewsList from "@/components/news-list";
 import { getLatestNews } from "@/lib/news";
-import styles from "@/app/archive/@latest/default.module.css";
+import styles from "@/app/(content)/archive/@latest/default.module.css";
 
 export default function DefaultLatestPage() {
   const latestNews = getLatestNews();

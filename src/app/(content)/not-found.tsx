@@ -1,10 +1,10 @@
-import styles from "@/app/not-found.module.css";
+import styles from "@/app/(content)/not-found.module.css";
 
 export default function NotFound() {
   return (
     <div className={styles.error}>
       <h1>Not Found!</h1>
-      <p>Unfortunately, we could not find the requested article.</p>
+      <p>The requested resource could not be found!</p>
     </div>
   );
 }
