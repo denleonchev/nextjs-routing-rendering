@@ -1,11 +1,11 @@
 import styles from "@/app/(content)/news/[id]/page.module.css";
-import { DUMMY_NEWS } from "@/dummy-news";
+import { getNewsItem } from "@/lib/news";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function NewsDetailPage(props: PageProps<"/news/[id]">) {
   const { id } = await props.params;
-  const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.slug === id);
+  const newsItem = getNewsItem(id);
 
   if (!newsItem) {
     notFound();
@@ -15,7 +15,7 @@ export default async function NewsDetailPage(props: PageProps<"/news/[id]">) {
     <article className={styles.newsArticle}>
       <header>
         <Link href={`/news/${newsItem.slug}/image`}>
-          <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} />
+          <img src={newsItem.image} alt={newsItem.title} />
         </Link>
         <h1>{newsItem.title}</h1>
         <time dateTime={newsItem.date}>{newsItem.date}</time>

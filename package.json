@@ -8,14 +8,22 @@
     "start": "next start",
     "lint": "eslint --cache --fix",
     "format": "prettier . --write",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:seed": "ts-node -r ./src/lib/env.ts --project tsconfig.local.json ./src/lib/initdb.ts"
   },
   "dependencies": {
+    "async": "^3.2.6",
+    "better-sqlite3": "^12.4.1",
+    "cloudinary": "^2.8.0",
+    "dotenv": "^17.2.3",
     "next": "16.0.3",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@types/async": "^3.2.25",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

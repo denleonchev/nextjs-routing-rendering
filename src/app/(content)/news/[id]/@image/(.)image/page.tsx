@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
-import { DUMMY_NEWS } from "@/dummy-news";
 import NewsImageModal from "@/components/image-modal";
+import { getNewsItem } from "@/lib/news";
 
 export default async function NewsImgaeInterceptingPage(
   props: PageProps<"/news/[id]/image">,
 ) {
   const { id } = await props.params;
-  const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.slug === id);
+  const newsItem = getNewsItem(id);
 
   if (!newsItem) {
     notFound();

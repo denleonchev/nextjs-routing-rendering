@@ -1,50 +1,77 @@
-import { DUMMY_NEWS } from "@/dummy-news";
+import sql from "better-sqlite3";
+import { NewsItem } from "@/lib/dummy-news";
+
+const db = sql("meals.db");
 
 export function getAllNews() {
-  return DUMMY_NEWS;
+  return db
+    .prepare(
+      `
+    SELECT * FROM news 
+    `,
+    )
+    .all() as unknown as NewsItem[];
 }
 
 export function getLatestNews() {
-  return DUMMY_NEWS.slice(0, 3);
+  return db
+    .prepare(
+      `
+    SELECT * FROM news ORDER BY date DESC LIMIT 3
+    `,
+    )
+    .all() as unknown as NewsItem[];
 }
 
 export function getAvailableNewsYears() {
-  return DUMMY_NEWS.reduce<number[]>((years, news) => {
-    const year = new Date(news.date).getFullYear();
-    if (!years.includes(year)) {
-      years.push(year);
-    }
-    return years;
-  }, []).sort((a, b) => b - a);
+  return db
+    .prepare(
+      `
+    SELECT DISTINCT strftime('%Y', date) FROM news ORDER BY date DESC
+    `,
+    )
+    .all() as unknown as { ["strftime('%Y', date)"]: string }[];
 }
 
 export function getAvailableNewsMonths(year?: number) {
   if (year === undefined || isNaN(year)) {
     return [];
   }
-
-  return DUMMY_NEWS.reduce<number[]>((months, news) => {
-    const newsYear = new Date(news.date).getFullYear();
-    if (newsYear === year) {
-      const month = new Date(news.date).getMonth();
-      if (!months.includes(month)) {
-        months.push(month + 1);
-      }
-    }
-    return months;
-  }, []).sort((a, b) => b - a);
+  return db
+    .prepare(
+      `
+    SELECT DISTINCT strftime('%m', date) FROM news WHERE strftime('%Y', date) = ? ORDER BY date DESC
+    `,
+    )
+    .all(String(year)) as unknown as { ["strftime('%m', date)"]: string }[];
 }
 
 export function getNewsForYear(year: number) {
-  return DUMMY_NEWS.filter(
-    (news) => new Date(news.date).getFullYear() === year,
-  );
+  return db
+    .prepare(
+      `
+    SELECT * FROM news WHERE strftime('%Y', date) = ? ORDER BY date DESC
+    `,
+    )
+    .all(String(year)) as unknown as NewsItem[];
+}
+
+export function getNewsItem(slug: string) {
+  return db
+    .prepare(
+      `
+    SELECT * FROM news WHERE slug = ? ORDER BY date DESC
+    `,
+    )
+    .get(slug) as unknown as NewsItem;
 }
 
 export function getNewsForYearAndMonth(year: number, month: number) {
-  return DUMMY_NEWS.filter((news) => {
-    const newsYear = new Date(news.date).getFullYear();
-    const newsMonth = new Date(news.date).getMonth() + 1;
-    return newsYear === year && newsMonth === month;
-  });
+  return db
+    .prepare(
+      `
+    SELECT * FROM news WHERE strftime('%Y', date) = ? AND strftime('%m', date) = ? ORDER BY date DESC
+    `,
+    )
+    .all(String(year), String(month).padStart(2, "0")) as unknown as NewsItem[];
 }

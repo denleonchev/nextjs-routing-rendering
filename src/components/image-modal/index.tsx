@@ -13,7 +13,7 @@ export default function NewsImageModal({
     <div className={styles.modalBackdrop} onClick={() => router.back()}>
       <dialog className={styles.modal} open>
         <div className={styles.fullscreenImage}>
-          <img src={`/images/news/${image}`} alt={title} />
+          <img src={image} alt={title} />
         </div>
       </dialog>
     </div>

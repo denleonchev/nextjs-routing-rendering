@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "@/components/news-list/index.module.css";
-import { NewsItem } from "@/dummy-news";
+import { NewsItem } from "@/lib/dummy-news";
 
 export default function NewsList({ news }: { news: NewsItem[] }) {
   return (
@@ -8,7 +8,7 @@ export default function NewsList({ news }: { news: NewsItem[] }) {
       {news.map((newsItem) => (
         <li key={newsItem.id}>
           <Link href={`/news/${newsItem.slug}`}>
-            <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} />
+            <img src={newsItem.image} alt={newsItem.title} />
             <span>{newsItem.title}</span>
           </Link>
         </li>

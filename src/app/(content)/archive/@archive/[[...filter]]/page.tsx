@@ -11,10 +11,13 @@ export default async function ArchivePage({
   const isMonthSelected = filter?.[1] !== undefined && filter?.[1] !== "";
   const selectedYear = isYearSelected ? parseInt(filter?.[0]) : undefined;
   const selectedMonth = isMonthSelected ? parseInt(filter?.[1]) : undefined;
-  const availableNewsMonths = getAvailableNewsMonths(selectedYear);
-  const availableNewsYears = getAvailableNewsYears();
+  const availableNewsMonths = getAvailableNewsMonths(selectedYear).map(
+    (newsItem) => parseInt(newsItem["strftime('%m', date)"]),
+  );
+  const availableNewsYears = getAvailableNewsYears().map((newsItem) =>
+    parseInt(newsItem["strftime('%Y', date)"]),
+  );
   const filteredNews = getFilteredNews(selectedYear, selectedMonth);
-
   if (!filteredNews.length) {
     throw new Error("Filter is invalid");
   }
