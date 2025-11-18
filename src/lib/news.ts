@@ -1,9 +1,11 @@
 import sql from "better-sqlite3";
 import { NewsItem } from "@/lib/dummy-news";
+import { setTimeout } from "node:timers/promises";
 
 const db = sql("meals.db");
 
-export function getAllNews() {
+export async function getAllNews() {
+  await setTimeout(2000);
   return db
     .prepare(
       `
@@ -13,7 +15,8 @@ export function getAllNews() {
     .all() as unknown as NewsItem[];
 }
 
-export function getLatestNews() {
+export async function getLatestNews() {
+  await setTimeout(4000);
   return db
     .prepare(
       `
@@ -23,7 +26,8 @@ export function getLatestNews() {
     .all() as unknown as NewsItem[];
 }
 
-export function getAvailableNewsYears() {
+export async function getAvailableNewsYears() {
+  await setTimeout(2000);
   return db
     .prepare(
       `
@@ -33,7 +37,8 @@ export function getAvailableNewsYears() {
     .all() as unknown as { ["strftime('%Y', date)"]: string }[];
 }
 
-export function getAvailableNewsMonths(year?: number) {
+export async function getAvailableNewsMonths(year?: number) {
+  await setTimeout(2000);
   if (year === undefined || isNaN(year)) {
     return [];
   }
@@ -46,7 +51,8 @@ export function getAvailableNewsMonths(year?: number) {
     .all(String(year)) as unknown as { ["strftime('%m', date)"]: string }[];
 }
 
-export function getNewsForYear(year: number) {
+export async function getNewsForYear(year: number) {
+  await setTimeout(2000);
   return db
     .prepare(
       `
@@ -56,7 +62,8 @@ export function getNewsForYear(year: number) {
     .all(String(year)) as unknown as NewsItem[];
 }
 
-export function getNewsItem(slug: string) {
+export async function getNewsItem(slug: string) {
+  await setTimeout(2000);
   return db
     .prepare(
       `
@@ -66,7 +73,8 @@ export function getNewsItem(slug: string) {
     .get(slug) as unknown as NewsItem;
 }
 
-export function getNewsForYearAndMonth(year: number, month: number) {
+export async function getNewsForYearAndMonth(year: number, month: number) {
+  await setTimeout(2000);
   return db
     .prepare(
       `

@@ -4,7 +4,6 @@ import path from "path";
 import { mapLimit } from "async";
 import { saveImageFile } from "./imageFile";
 import { DUMMY_NEWS } from "./dummy-news";
-import { getAllNews } from "./news";
 
 const db = sql("meals.db");
 

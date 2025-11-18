@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import styles from "@/components/image-modal/index.module.css";
-import { NewsItem } from "@/dummy-news";
+import { NewsItem } from "@/lib/dummy-news";
 
 export default function NewsImageModal({
   image,

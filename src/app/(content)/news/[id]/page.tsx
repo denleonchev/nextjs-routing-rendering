@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 
 export default async function NewsDetailPage(props: PageProps<"/news/[id]">) {
   const { id } = await props.params;
-  const newsItem = getNewsItem(id);
+  const newsItem = await getNewsItem(id);
 
   if (!newsItem) {
     notFound();

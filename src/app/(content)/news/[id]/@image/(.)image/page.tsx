@@ -6,7 +6,7 @@ export default async function NewsImgaeInterceptingPage(
   props: PageProps<"/news/[id]/image">,
 ) {
   const { id } = await props.params;
-  const newsItem = getNewsItem(id);
+  const newsItem = await getNewsItem(id);
 
   if (!newsItem) {
     notFound();
